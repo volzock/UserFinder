@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <br>
+    <hr>
+    <div class="center">
+        <h1> Upload video for processing :) </h1>
+        <form method="POST" action="{{ context.url }}" enctype="multipart/form-data">
+            <input type="file" name="video">
+            <button>Submit</button>
+        </form>
+    </div>
+    <hr>
+    <br>
+    <br>
+    <hr>
+    <div class="center">
+        <form method="POST" action="{{ context.url_user }}" enctype="multipart/form-data">
+            <h1> Add user for detecting </h1>
+            <label for="image">Choose file to upload</label>
+            <input type="file" name="image" id="image" multiple>
+            <label for="user">Choose user</label>
+            <input type="text" name="user" id="user">
+            <button>Submit</button>
+        </form>
+    </div>
+    <hr>
+    <br>
+{% endblock %}
