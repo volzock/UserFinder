@@ -6,14 +6,58 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, template_folder='../templates')
 app.config['SECRET_KEY'] = os.urandom(32)
-# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://127.0.0.1:5432/user_finder"
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:1234@127.0.0.1:5432/user_finder"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+class UserModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(), unique=True)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return f"User_{self.id} - {self.name}"
+
+
+class PhotoUserModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username_id = db.Column(db.Integer, db.ForeignKey('user_model.id'), nullable=False)
+    photo = db.Column(db.LargeBinary, nullable=False)
+
+    def __init__(self, username_id, photo):
+        self.username_id = username_id
+        self.photo = photo
+
+    def __repr__(self):
+        return f"User({self.username_id}) - {self.name}"
+
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 
 @app.route('/add/user', methods=['POST'])
 def addUser():
-    print([request.files.getlist('image')])
-    print(request.form.get('user'))
+    username = request.form.get('user')
+    if username:
+        if not db.session.query(UserModel).filter(UserModel.name == username).first():
+            user = UserModel(username)
+            db.session.add(user)
+            db.session.commit()
+
+        if request.files.getlist('image')[0].filename:
+            for file in request.files.getlist('image'):
+                user = db.session.query(UserModel).filter(UserModel.name == username).first()
+                user_id = user.id
+
+                photo = PhotoUserModel(user_id, file.read())
+                db.session.add(photo)
+                db.session.commit()
+
     return redirect(url_for('root'))
 
 
