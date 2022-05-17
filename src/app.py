@@ -1,3 +1,4 @@
+# It's really bad code, I'm so sorry about it, but it works (/*W*)/
 import os
 
 from flask import Flask, render_template, request, url_for, redirect
@@ -35,6 +36,23 @@ class PhotoUserModel(db.Model):
         return f"User({self.username_id}) - {self.name}"
 
 
+class VideoModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    video_name = db.Column(db.String())
+
+    def __init__(self, name):
+        self.video_name = name
+
+    def __repr__(self):
+        return f"Video_{self.id} - {self.video_name}"
+
+
+# Add to these model the ouput data (mayby frame(where user had detected), position of user, idk :) )
+class ProcessingDatarModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    video_id = db.Column(db.Integer, db.ForeignKey('video_model.id'), nullable=False)
+
+
 @app.before_first_request
 def create_tables():
     db.create_all()
@@ -63,6 +81,9 @@ def addUser():
 
 @app.route('/add/video', methods=['POST'])
 def addVideo():
+    # these function upload video
+    # process video here
+    # create output function
     file = request.files.get('video')
     print(file)
     return redirect(url_for('root'))
