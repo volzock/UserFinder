@@ -1,17 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <br>
-    <hr>
-    <div class="center">
-        <h1> Upload video for processing :) </h1>
-        <form method="POST" action="{{ context.url }}" enctype="multipart/form-data">
-            <input type="file" name="video">
-            <button>Submit</button>
-        </form>
-    </div>
-    <hr>
-    <br>
+    <a href="{{ context.users_url }}"> see all users </a>
     <br>
     <hr>
     <div class="center">

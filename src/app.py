@@ -69,20 +69,18 @@ def addUser():
     return redirect(url_for('root'))
 
 
-@app.route('/add/video', methods=['POST'])
-def addVideo():
-    # these function upload video
-    # process video here
-    # create output function
-    file = request.files.get('video')
-    print(file)
-    return redirect(url_for('root'))
+@app.route('/users')
+def users():
+    context = {
+        'users': db.session.query(UserModel),
+        'root_url': url_for('root')
+    }
+    return render_template('users.html', context=context)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
-    context = {'url': url_for('addVideo'),
-               'url_user': url_for('addUser'),
-               'users': [('1', 'volzock'), ('2', 'kst_obd')]}
+    context = {'url_user': url_for('addUser'),
+               'users_url': url_for('users')}
 
     return render_template('root.html', context=context)

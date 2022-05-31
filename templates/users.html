@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <a href={{ context.root_url }}>go to root</a>
+    <br>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+        </tr>
+        {% for user in context.users %}
+            <td> {{ user.id }} </td>
+            <td> {{ user.name }} </td>
+        {% endfor %}
+    </table>
+    <br>
+    <hr>
+{% endblock %}
