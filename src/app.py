@@ -90,11 +90,24 @@ def statistics():
     return render_template('statistics.html', context=context)
 
 
+@app.route('/start', methods=['POST'])
+def startProcessing():
+    camera_ip = request.form.get('camera_ip')
+
+    # start in this point
+    # https://www.the-analytics.club/python-shell-commands#:~:text=If%20you%20need%20to%20execute,arguments%20or%20producing%20text%20output.
+    return redirect(url_for('root'))
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def root():
     context = {'url_user': url_for('addUser'),
                'users_url': url_for('users'),
                'statistics_url': url_for('statistics'),
+               'processing_url': url_for('startProcessing'),
                }
 
     return render_template('root.html', context=context)
+
+

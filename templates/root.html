@@ -13,9 +13,18 @@
             <label for="user">Choose user</label>
             <input type="text" name="user" id="user">
             <button>Submit</button>
-            <br> <img src="rtsp://192.168.0.110:8554/video_stream"> </br>
         </form>
     </div>
     <hr>
     <br>
+    <div class="center">
+        <form method="POST" action="{{ context.processing_url }}" enctype="multipart/form-data">
+            <h1> Add user for detecting </h1>
+            <label for="camera_ip">Camera IP</label>
+            <input type="text" name="camera_ip" id="camera_ip">
+            <button>start video processing</button>
+        </form>
+    </div>
+    <br>
+    <hr>
 {% endblock %}
