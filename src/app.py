@@ -4,6 +4,7 @@ import os
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import subprocess
 
 
 app = Flask(__name__, template_folder='../templates')
@@ -93,6 +94,7 @@ def statistics():
 @app.route('/start', methods=['POST'])
 def startProcessing():
     camera_ip = request.form.get('camera_ip')
+    subprocess.Popen(["python", "stream.py", "--device_id", camera_ip, "--fps", "30", "--image_width", "640", "--image_height", "480"])
 
     # start in this point
     # https://www.the-analytics.club/python-shell-commands#:~:text=If%20you%20need%20to%20execute,arguments%20or%20producing%20text%20output.
