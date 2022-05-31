@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 app = Flask(__name__, template_folder='../templates')
@@ -36,21 +37,10 @@ class PhotoUserModel(db.Model):
         return f"User({self.username_id}) - {self.name}"
 
 
-class VideoModel(db.Model):
+class DetectUserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    video_name = db.Column(db.String())
-
-    def __init__(self, name):
-        self.video_name = name
-
-    def __repr__(self):
-        return f"Video_{self.id} - {self.video_name}"
-
-
-# Add to these model the ouput data (mayby frame(where user had detected), position of user, idk :) )
-class ProcessingDatarModel(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    video_id = db.Column(db.Integer, db.ForeignKey('video_model.id'), nullable=False)
+    username_id = db.Column(db.Integer, db.ForeignKey('user_model.id'), nullable=False)
+    time = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 @app.before_first_request
