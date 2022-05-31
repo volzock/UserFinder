@@ -42,6 +42,9 @@ class DetectUserModel(db.Model):
     username_id = db.Column(db.Integer, db.ForeignKey('user_model.id'), nullable=False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def __init__(self, username_id):
+        self.username_id = username_id
+
 
 @app.before_first_request
 def create_tables():
@@ -78,9 +81,20 @@ def users():
     return render_template('users.html', context=context)
 
 
+@app.route('/statistics')
+def statistics():
+    context = {
+        'statistics': db.session.query(DetectUserModel),
+        'root_url': url_for('root')
+    }
+    return render_template('statistics.html', context=context)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def root():
     context = {'url_user': url_for('addUser'),
-               'users_url': url_for('users')}
+               'users_url': url_for('users'),
+               'statistics_url': url_for('statistics'),
+               }
 
     return render_template('root.html', context=context)
