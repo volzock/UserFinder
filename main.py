@@ -1,4 +1,4 @@
-from src.app import app, db
+from src.app import app
 
 
 if __name__ == '__main__':

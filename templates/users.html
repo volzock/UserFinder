@@ -1,19 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AllUsersPage</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="static/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/styles/services_styles.css">
+
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header d-flex align-items-center">
+
+    <!-- Лого -->
+    <div class="logo mr-auto">
+        <a href="">Develop <span>MTUCI</span></a>
+    </div>
+
+    <!-- Кнопки навигации -->
+    <nav class="main_nav justify-self-end text-right">
+        <ul>
+            <li><a href="/main">Загрузить данные</a></li>
+            <li><a href="/statistics">Посмотреть статистику</a></li>
+            <li><a href="/">Главная страница</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<!-- Главная -->
+<div class="home">
+    <div class="home_background_container prlx_parent">
+        <div class="home_background prlx" style="background-image:url(static/images/AppBG.jpg)"></div>
+    </div>
+    <div class="home_title" style="padding: 25px">
+        <h2>Все пользователи</h2>
+    </div>
+</div>
+
+
+<script src="static/js/jquery-3.2.1.min.js"></script>
+<script src="static/js/services_custom.js"></script>
+
+<script src="static/plugins/greensock/TweenMax.min.js"></script>
+<script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="static/plugins/greensock/animation.gsap.min.js"></script>
+
+
+</body>
+
+</html>
+
+
 {% extends 'base.html' %}
 
 {% block body %}
-    <a href={{ context.root_url }}>go to root</a>
-    <br>
-    <hr>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-        </tr>
-        {% for user in context.users %}
-            <td> {{ user.id }} </td>
-            <td> {{ user.name }} </td>
-        {% endfor %}
-    </table>
-    <br>
-    <hr>
+<br>
+<table border="1" bordercolor="#fff">
+    <tr align="center">
+        <th width="35%" colspan="1"><h1 style="color: #3e2b75">ID</h1></th>
+        <th width="20%"></th>
+        <th width="45%" colspan="1"><h1 style="color: #3e2b75">NAME</h1></th>
+        <th width="20%"></th>
+    </tr>
+    {% for user in context.users %}
+    <tr align="center">
+        <td><h2 style="color: #3e2b75">{{ user.id }}</h2></td>
+        <td></td>
+        <td><h2 style="color: #3e2b75">{{ user.name }}</h2></td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
 {% endblock %}

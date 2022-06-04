@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MainPage</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="static/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/styles/services_styles.css">
+
+</head>
+<body>
+
+<!-- Шапка -->
+<header class="header d-flex align-items-center">
+
+    <!-- Лого -->
+    <div class="logo mr-auto">
+        <a href="">Develop <span>MTUCI</span></a>
+    </div>
+
+    <!-- Кнопки навигации -->
+    <nav class="main_nav justify-self-end text-right">
+        <ul>
+            <li><a href="/users">Посмотреть всех пользователей</a></li>
+            <li><a href="/statistics">Посмотреть статистику</a></li>
+            <li><a href="/">Главная страница</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<!-- Главная -->
+<div class="home">
+    <div class="home_background_container prlx_parent">
+        <div class="home_background prlx" style="background-image:url(static/images/AppBG.jpg)"></div>
+    </div>
+    <div class="home_title" style="padding: 25px">
+        <h2>Загрузка данных</h2>
+    </div>
+</div>
+
+
+<!-- Загрузка данных -->
+<div class="device" style="padding: 150px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 order-lg-1 order-2">
+                <div class="device_content">
+                    <h1>Для того чтобы загрузить данные нужно:</h1>
+                    <ul class="device_items">
+                        <li class="device_item clearfix">
+                            <span>1</span>
+                            <p></p>
+                            <p>Ознакомиться с документацией проекта</p>
+                        </li>
+                        <li class="device_item clearfix">
+                            <span>2</span>
+                            <p></p>
+                            <p>Иметь видео камеру и качественные фото</p>
+                        </li>
+                        <li class="device_item clearfix">
+                            <span>3</span>
+                            <p></p>
+                            <p>Пристегнуться и быть готовым к чудесам</p>
+                        </li>
+
+                        <!-- Кнопки загрузки -->
+                        <div class="cta">
+                            <div class="cta_background"
+                                 style="background-image:url(static/images/BGSlides.jpg)"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1" style="left: 650px; bottom: 425px">
+                                        <form method="POST" action="{{ context.url_user }}"
+                                              enctype="multipart/form-data">
+                                            <p><strong>Выбрать или Создать пользователя</strong></p>
+                                            <p><input maxlength="25" size="40" type="text" name="user" id="user"></p>
+                                            <div>
+                                                <input type="file" name="image" id="image" multiple>
+                                            </div>
+                                            <div style="top: 15px">
+                                                <button style="background: #3e2b75; border-radius: 5px; color: #fff; width: 300px; height: 40px;">
+                                                    Отослать данные
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <form method="POST" action="{{ context.processing_url }}"
+                                              enctype="multipart/form-data">
+                                            <div style="top: 75px">
+                                                <p><strong>Выбрать IP камеру</strong></p>
+                                                <p><input maxlength="25" size="40" type="text" name="camera_ip"
+                                                          id="camera_ip"></p>
+                                                <div>
+                                                    <button style="background: #3e2b75; border-radius: 5px; color: #fff; width: 300px; height: 40px;">
+                                                        Запустить процесс обработки
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="static/js/jquery-3.2.1.min.js"></script>
+<script src="static/js/services_custom.js"></script>
+
+<script src="static/plugins/greensock/TweenMax.min.js"></script>
+<script src="static/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="static/plugins/greensock/animation.gsap.min.js"></script>
+
+
+</body>
+
+</html>

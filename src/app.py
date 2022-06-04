@@ -7,7 +7,7 @@ from datetime import datetime
 import subprocess
 
 
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__, template_folder='../templates', static_folder='../templates/static')
 app.config['SECRET_KEY'] = os.urandom(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:1234@127.0.0.1:5432/user_finder"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -101,15 +101,20 @@ def startProcessing():
     return redirect(url_for('root'))
 
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/main', methods=['GET', 'POST'])
 def root():
     context = {'url_user': url_for('addUser'),
                'users_url': url_for('users'),
                'statistics_url': url_for('statistics'),
                'processing_url': url_for('startProcessing'),
                }
+    return render_template('main.html', context=context)
 
-    return render_template('root.html', context=context)
+
+@app.route('/')
+def hello_page():
+    context = {
+    }
+    return render_template('hello.html', context=context)
 
 
